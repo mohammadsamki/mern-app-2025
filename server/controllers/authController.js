@@ -67,3 +67,15 @@ export const logout = asyncHandler(async (_req, res) => {
   res.clearCookie('token');
   res.json({ message: 'Logged out' });
 });
+
+export const home = asyncHandler(async (req, res) => {
+    console.log(req.user); // Log the user object for debugging
+    try {
+        res.json({ message: 'Welcome to the home page!',user: req.user });
+        
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+        
+    }
+  
+});

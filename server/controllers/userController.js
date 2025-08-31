@@ -41,20 +41,30 @@ export const createUser = asyncHandler(async (req, res) => {
 
 // PATCH /api/users/:id
 export const updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).select('+password');
-  if (!user) return res.status(404).json({ message: 'User not found' });
-
-  const { name, username, email, password, role } = req.body;
-
-  if (name !== undefined) user.name = name;
-  if (username !== undefined) user.username = username.toLowerCase();
-  if (email !== undefined) user.email = email.toLowerCase();
-  if (role !== undefined && ['user', 'admin'].includes(role)) user.role = role;
-  if (password) user.password = await bcrypt.hash(password, 12);
-
-  await user.save();
-  res.json({ user: user.toJSON() });
+const user = req.user; // Use the authenticated user from middleware
+const {name,username,email} =req.body
+user.name = name || user.name;
+user.username = username || user.username;
+user.email = email || user.email;
+await user.save();
+res.json({ user });
 });
+export const updatePassword = asyncHandler(async (req, res) => {
+    const user = req.user
+    console.log(user)
+    const { currentPassword, newPassword } = req.body;
+    console.log(currentPassword, newPassword)
+    if (!currentPassword || !newPassword) {
+        return res.status(400).json({ message: 'Current and new passwords are required' });
+    }
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+        return res.status(401).json({ message: 'Current password is incorrect' });
+    }
+    user.password = await bcrypt.hash(newPassword, 12);
+    await user.save();
+    res.json({ message: 'Password updated successfully' });
+})
 
 // DELETE /api/users/:id
 export const deleteUser = asyncHandler(async (req, res) => {

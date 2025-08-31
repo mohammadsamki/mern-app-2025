@@ -5,7 +5,9 @@ import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 export default function Login (){
+    
 
   const [ username,setUsername] = useState('')
     const [ password,setPassword] = useState('')
@@ -17,7 +19,10 @@ export default function Login (){
                 identifier:username,password
             })
             console.log(res.data)
+            localStorage.setItem('token', res.data.token); // Store token in local storage
             alert('Login done')
+            // Redirect to home or dashboard after successful login
+            window.location.href = '/'; // Adjust the redirect path as needed
             
         } catch (error) {
             console.log(error.data)
@@ -49,6 +54,10 @@ export default function Login (){
       />    </FormControl>
           
     <Button type="submit">Login</Button>
+    {/* register button */}
+    <Link to="/register">
+      <Button variant="outlined" sx={{marginLeft: 2}}>Register</Button>
+    </Link>
     </form>
         </div>
     )

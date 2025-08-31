@@ -25,6 +25,8 @@ export default function Register (){
             })
             console.log(res.data)
             alert('reg done')
+            // Redirect to login or home after successful registration
+            window.location.href = '/login'; // Adjust the redirect path as needed
             
         } catch (error) {
             console.log(error.data)

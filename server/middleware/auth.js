@@ -18,7 +18,7 @@ export const protect = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id).select('-password');
+    const user = await User.findById(decoded.id);
     if (!user) return res.status(401).json({ message: 'User not found for token' });
 
     req.user = user;
@@ -30,7 +30,8 @@ export const protect = async (req, res, next) => {
 
 export const authorize = (...roles) => (req, res, next) => {
   if (!roles.includes(req.user.role)) {
-    return res.status(403).json({ message: 'Forbidden' });
+    console.error(`User role ${req.user.role} is not authorized for this action`);
+    return res.status(403).json({ message: 'Forbidden !!!' });
   }
   next();
 };
