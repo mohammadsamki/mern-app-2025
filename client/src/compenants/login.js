@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from "react";
+import React, {useState,useContext} from "react";
 import axios from 'axios'
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -6,8 +6,11 @@ import Input from "@mui/material/Input";
 import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { UserRoleContext } from "./userRole";
+
 export default function Login (){
-    
+
+  const { login } = useContext(UserRoleContext);
 
   const [ username,setUsername] = useState('')
     const [ password,setPassword] = useState('')
@@ -20,6 +23,8 @@ export default function Login (){
             })
             console.log(res.data)
             localStorage.setItem('token', res.data.token); // Store token in local storage
+            login(res.data.user.role); // Update role in context
+            
             alert('Login done')
             // Redirect to home or dashboard after successful login
             window.location.href = '/'; // Adjust the redirect path as needed

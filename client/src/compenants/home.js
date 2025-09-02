@@ -3,7 +3,9 @@ import React,{useEffect} from 'react';
 import { Typography, Button } from '@mui/material';
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
+import { UserRoleContext } from './userRole';
 export default function Home() {
+    const {logout} = React.useContext(UserRoleContext);
         const token = localStorage.getItem('token');
         const [user, setUser] = React.useState(null);
         const [currentPassword, setCurrentPassword] = React.useState('');
@@ -134,6 +136,7 @@ export default function Home() {
             
             <Button variant="contained" color="primary" onClick={() =>{ 
                 localStorage.removeItem('token'); // Clear token from local storage
+                logout();
                 setUser(null); // Clear user state
                 window.location.href = '/login'}}>
                 Logout
