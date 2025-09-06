@@ -5,11 +5,11 @@ import Register from './compenants/register';
 import Login from './compenants/login';
 import Home from './compenants/home';
 import DashboardLayoutBranding from './compenants/admin/dashboard';
-import { UserRoleContext } from './compenants/userRole';
+import { UserRoleContext ,useUserRole} from './compenants/userRole';
 import {useContext} from 'react';
 
 function App() {
-            const { role } = useContext(UserRoleContext);
+            const { role ,loading} = useUserRole();
             console.log("role in App.js:", role);
 
   return (
