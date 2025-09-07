@@ -15,7 +15,7 @@ const router = Router();
 // all user CRUD is protected + admin-only by default
 // router.use(protect, authorize('admin'));
 
-router.get('/', getUsers);
+router.get('/',authorize, getUsers);
 router.get('/:id', getUser);
 
 router.post(

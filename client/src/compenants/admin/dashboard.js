@@ -7,6 +7,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { AppProvider, type Navigation } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { DemoProvider, useDemoRouter } from '@toolpad/core/internal';
+import UserCrud from './userCrud';
 
 const NAVIGATION: Navigation = [
   {
@@ -15,6 +16,11 @@ const NAVIGATION: Navigation = [
     icon: <DashboardIcon />,
   },
   {
+    segment: 'users',
+    title: 'Users',
+    icon: <ShoppingCartIcon />,
+  },
+    {
     segment: 'orders',
     title: 'Orders',
     icon: <ShoppingCartIcon />,
@@ -38,6 +44,7 @@ const demoTheme = createTheme({
 });
 
 function DemoPageContent({ pathname }: { pathname: string }) {
+  
   return (
     <Box
       sx={{
@@ -48,7 +55,8 @@ function DemoPageContent({ pathname }: { pathname: string }) {
         textAlign: 'center',
       }}
     >
-      <Typography>Dashboard content for {pathname}</Typography>
+      {pathname === '/users' ? <UserCrud/> :<Typography>Dashboard content for {pathname}</Typography> }
+      
     </Box>
   );
 }
