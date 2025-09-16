@@ -8,6 +8,8 @@ import { AppProvider, type Navigation } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { DemoProvider, useDemoRouter } from '@toolpad/core/internal';
 import UserCrud from './userCrud';
+import CategoryManagement from './category';
+import ProductsManagement from './products';
 
 const NAVIGATION: Navigation = [
   {
@@ -21,6 +23,16 @@ const NAVIGATION: Navigation = [
     icon: <ShoppingCartIcon />,
   },
     {
+    segment: 'category',
+    title: 'Category',
+    icon: <ShoppingCartIcon />,
+  },
+  {
+    segment: 'products',
+    title: 'Products',
+    icon: <ShoppingCartIcon />,
+  },
+  {
     segment: 'orders',
     title: 'Orders',
     icon: <ShoppingCartIcon />,
@@ -65,6 +77,8 @@ function DemoPageContent({ pathname }: { pathname: string }) {
     >
       {pathname === '/users' ? <UserCrud/> :<Typography>Dashboard content for {pathname}</Typography> }
       {pathname === '/logout' ? handleLogout() :null }
+      {pathname === '/category' ? <CategoryManagement/> :null }
+      {pathname === '/products' ? <ProductsManagement/> :null }
 
     </Box>
   );
