@@ -8,6 +8,8 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import productsRoutes from './routes/productsRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -30,6 +32,8 @@ app.use(cors({
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/products', productsRoutes);
+app.use('/api/categories', categoryRoutes);
 
 // Health check
 app.get('/health', (_req, res) => res.json({ ok: true }));

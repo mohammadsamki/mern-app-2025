@@ -25,8 +25,16 @@ const NAVIGATION: Navigation = [
     title: 'Orders',
     icon: <ShoppingCartIcon />,
   },
+    {
+    segment: 'logout',
+    title: 'Logout',
+    icon: <ShoppingCartIcon />,
+  },
 ];
-
+const handleLogout = () => {
+  localStorage.removeItem('token'); // clear auth token
+  window.location.href = '/login'; // Redirect to login page
+}
 const demoTheme = createTheme({
   cssVariables: {
     colorSchemeSelector: 'data-toolpad-color-scheme',
@@ -56,7 +64,8 @@ function DemoPageContent({ pathname }: { pathname: string }) {
       }}
     >
       {pathname === '/users' ? <UserCrud/> :<Typography>Dashboard content for {pathname}</Typography> }
-      
+      {pathname === '/logout' ? handleLogout() :null }
+
     </Box>
   );
 }

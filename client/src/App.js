@@ -12,7 +12,12 @@ function App() {
             
             const { role ,loading} = useUserRole();
             console.log("role in App.js:", role);
+  if (loading) {
+    return <div>Loading...
 
+      <img src="https://media.tenor.com/o8m3bKTsifUAAAAM/hold-on.gif" alt="Loading..." />
+    </div>; // or a spinner, etc.
+  }
   return (
     <BrowserRouter>
         <Routes>
