@@ -11,6 +11,7 @@ import userRoutes from './routes/userRoutes.js';
 import productsRoutes from './routes/productsRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
+import cartRoutes from './routes/cartRoutes.js'
 
 dotenv.config();
 const app = express();
@@ -34,6 +35,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productsRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/cart', cartRoutes);
 
 // Health check
 app.get('/health', (_req, res) => res.json({ ok: true }));

@@ -10,17 +10,20 @@ import { DemoProvider, useDemoRouter } from '@toolpad/core/internal';
 import UserCrud from './userCrud';
 import CategoryManagement from './category';
 import ProductsManagement from './products';
+import { Link, useLocation } from 'react-router-dom';
 
 const NAVIGATION: Navigation = [
   {
     segment: 'dashboard',
     title: 'Dashboard',
     icon: <DashboardIcon />,
+    component: Link
   },
   {
     segment: 'users',
     title: 'Users',
     icon: <ShoppingCartIcon />,
+    component: Link
   },
     {
     segment: 'category',
@@ -94,8 +97,9 @@ interface DemoProps {
 
 export default function DashboardLayoutBranding(props: DemoProps) {
   const { window } = props;
-
-  const router = useDemoRouter('/dashboard');
+  //  fetch the current path , from the url using useLocation
+  const location = useLocation();
+  const router = useDemoRouter(location.pathname);
 
   // Remove this const when copying and pasting into your project.
   const demoWindow = window !== undefined ? window() : undefined;

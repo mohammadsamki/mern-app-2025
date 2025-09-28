@@ -96,6 +96,9 @@ export default function ProductsManagement() {
                     <td>
                         <img src={product.image} alt={product.name} style={{ width: '100px' }} />
                     </td>
+                    <td>
+                        {product.category}
+                    </td>
                 </tr>
             ))}
         </tbody>

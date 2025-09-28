@@ -7,6 +7,9 @@ import Home from './compenants/home';
 import DashboardLayoutBranding from './compenants/admin/dashboard';
 import { UserRoleContext ,useUserRole} from './compenants/userRole';
 import {useContext} from 'react';
+import NotFound from './compenants/404';
+import ProductsManagement from './compenants/user/products';
+import Cart from './compenants/user/cart';
 
 function App() {
             
@@ -23,6 +26,7 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register/>}/>
+          <Route path='/*' element={<NotFound/>}/>
           <Route path='/' element={
             //  if admin show dashboard else show home
             //  call the useerRoleContext
@@ -30,6 +34,14 @@ function App() {
 
             }/>
           {/* Add more routes as needed */}
+          {/* users path */}
+          <Route path='/dashboard' element={<DashboardLayoutBranding/>}/>
+          <Route path='/users' element={<DashboardLayoutBranding/>}/>
+          <Route path='/category' element={<DashboardLayoutBranding/>}/>
+          <Route path='/products' element={<DashboardLayoutBranding/>}/>
+          <Route path='/orders' element={<DashboardLayoutBranding/>}/>
+          <Route path='/ProductsManagement' element={<ProductsManagement/>}/>
+          <Route path='/cart' element={<Cart/>}/>
         </Routes>
     </BrowserRouter>
     
